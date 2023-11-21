@@ -191,11 +191,11 @@ jobs:
           echo "::remove-matcher owner=csc::"
           docker buildx build . --target exceptionless --platform linux/amd64 --tag wenzetan/exceptionless-ci:latest --cache-from type=gha --cache-to type=gha,mode=max --load
 
-      - name: Build all-in-one Elasticsearch 7 docker image
+      - name: Build all-in-one Elasticsearch 8 docker image
         if: "${{ env.DOCKER_USERNAME != '' && startsWith(github.ref, 'refs/tags/v') && github.event_name != 'pull_request' }}"
         run: |
           echo "::remove-matcher owner=csc::"
-          docker buildx build . --target exceptionless7 --platform linux/amd64 --tag wenzetan/exceptionless:latest-elasticsearch7 --cache-from type=gha --cache-to type=gha,mode=max --load
+          docker buildx build . --target exceptionless --platform linux/amd64 --tag wenzetan/exceptionless:latest-elasticsearch --cache-from type=gha --cache-to type=gha,mode=max --load
 
       - name: Login to GitHub Container Registry
         if: "${{ env.DOCKER_USERNAME != '' }}"
