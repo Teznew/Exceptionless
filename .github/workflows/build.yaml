@@ -226,28 +226,28 @@ jobs:
           # tag and push docker images
 
           for image in {"api","job","app","exceptionless"}; do
-            docker image tag exceptionless/$image-ci:latest exceptionless/$image-ci:$VERSION
-            docker image tag exceptionless/$image-ci:latest ghcr.io/exceptionless/exceptionless/$image-ci:$VERSION
-            docker image tag exceptionless/$image-ci:latest ghcr.io/exceptionless/exceptionless/$image-ci:latest
+            docker image tag wenzetan/$image-ci:latest exceptionless/$image-ci:$VERSION
+            docker image tag wenzetan/$image-ci:latest ghcr.io/exceptionless/exceptionless/$image-ci:$VERSION
+            docker image tag wenzetan/$image-ci:latest ghcr.io/exceptionless/wenzetan/$image-ci:latest
 
             docker image push --all-tags exceptionless/$image-ci
           done
 
-      - name: Publish Release Packages
-        if: "${{ env.DOCKER_USERNAME != '' && startsWith(github.ref, 'refs/tags/v') && github.event_name != 'pull_request' }}"
-        run: |
-          echo "::remove-matcher owner=csc::"
-          # tag and push docker images
+      # - name: Publish Release Packages
+      #   if: "${{ env.DOCKER_USERNAME != '' && startsWith(github.ref, 'refs/tags/v') && github.event_name != 'pull_request' }}"
+      #   run: |
+      #     echo "::remove-matcher owner=csc::"
+      #     # tag and push docker images
 
-          # only build elasticsearch 7 all-in-one image for release builds
-          docker image tag exceptionless/exceptionless:latest-elasticsearch7 exceptionless/exceptionless:$VERSION-elasticsearch7
+      #     # only build elasticsearch 7 all-in-one image for release builds
+      #     docker image tag exceptionless/exceptionless:latest-elasticsearch7 exceptionless/exceptionless:$VERSION-elasticsearch7
 
-          for image in {"api","job","app","exceptionless"}; do
-            docker image tag exceptionless/$image-ci:latest exceptionless/$image:$VERSION
-            docker image tag exceptionless/$image-ci:latest exceptionless/$image:latest
+      #     for image in {"api","job","app","exceptionless"}; do
+      #       docker image tag wenzetan/$image-ci:latest exceptionless/$image:$VERSION
+      #       docker image tag wenzetan/$image-ci:latest exceptionless/$image:latest
 
-            docker image push --all-tags exceptionless/$image
-          done
+      #       docker image push --all-tags exceptionless/$image
+      #     done
 
   deploy:
     if: "${{ (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) && github.event_name != 'pull_request' }}"
