@@ -16,15 +16,15 @@ public class TruncateFieldsAction : EventPipelineActionBase
     {
         ctx.Event.Tags?.RemoveExcessTags();
 
-        if (ctx.Event.Message is not null && ctx.Event.Message.Length > 2000)
-            ctx.Event.Message = ctx.Event.Message.Truncate(2000);
-        else if (String.IsNullOrEmpty(ctx.Event.Message))
-            ctx.Event.Message = null;
+        // if (ctx.Event.Message is not null && ctx.Event.Message.Length > 2000)
+        //     ctx.Event.Message = ctx.Event.Message.Truncate(2000);
+        // else if (String.IsNullOrEmpty(ctx.Event.Message))
+        //     ctx.Event.Message = null;
 
-        if (ctx.Event.Source is not null && ctx.Event.Source.Length > 2000)
-            ctx.Event.Source = ctx.Event.Source.Truncate(2000);
-        else if (String.IsNullOrEmpty(ctx.Event.Source))
-            ctx.Event.Source = null;
+        // if (ctx.Event.Source is not null && ctx.Event.Source.Length > 2000)
+        //     ctx.Event.Source = ctx.Event.Source.Truncate(2000);
+        // else if (String.IsNullOrEmpty(ctx.Event.Source))
+        //     ctx.Event.Source = null;
 
         if (!ctx.Event.HasValidReferenceId())
         {
