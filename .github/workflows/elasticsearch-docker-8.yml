@@ -6,7 +6,6 @@ on:
     - 'build/docker/elasticsearch/8.x/**'
     - '.github/workflows/elasticsearch-docker-8.yml'
 
-
 jobs:
 
   build:
